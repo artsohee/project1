@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jq-1.10.2.js"></script>
+	<script src="http://js.nx.com/s1/arpiel/obt/lib/arpiel.obt.ui.lib.js"></script>
+	<script src="js/flip.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var cardLi = $('#card li');
+		var cardLength = cardLi.length;
+		var idx = 0;
+
+		for(var i = 0; i < cardLength; i++){
+			$(cardLi[i]).flip({
+				axis: "y", // y or x
+				reverse: false, // true and false
+				trigger: "manual", // click or hover
+				speed: 500
+			});
+		}
+
+		function flipAct(idx){
+			if(Detectizr.browser.version <= 9 && Detectizr.browser.name == 'ie'){
+				$(cardLi[idx]).children('.front').css('display', 'none');
+			}else{
+				$(cardLi[idx]).flip(true);
+				$(cardLi[idx]).addClass('clear');
+			}
+		}
+
+
+
+		$('#card li').on('click', function(){
+			var self = $(this);
+			idx = self.index();
+			if(self.hasClass('clear')){
+				return;
+			}else{
+				$.ajax({
+					url : 'http://artwoohyun.cafe24.com',
+					type : 'GET',
+					success : function(){
+						 flipAct(idx);
+					}
+				})
+			}
+		});
+
+	});
+
+	</script>
+</head>
+<body>
+	<p>변경점 확인</p>
+	<p>변경점 확인1</p>
+	<div id="card">
+		<ul class="clearFix">
+			<!-- S : 이미 뽑힌 뽑기는 clear 클래스 추가 -->
+			<li class="clear">
+				<div class="front">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork01.jpg" alt="">
+				</div>
+				<div class="back">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork02.jpg" alt="">
+				</div>
+			</li>
+			<li>
+				<div class="front">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork03.jpg" alt="">
+				</div>
+				<div class="back">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork04.jpg" alt="">
+				</div>
+			</li>
+			<li>
+				<div class="front">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork05.jpg" alt="">
+				</div>
+				<div class="back">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork06.jpg" alt="">
+				</div>
+			</li>
+			<li>
+				<div class="front">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork07.jpg" alt="">
+				</div>
+				<div class="back">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork08.jpg" alt="">
+				</div>
+			</li>
+			<li>
+				<div class="front">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork09.jpg" alt="">
+				</div>
+				<div class="back">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork10.jpg" alt="">
+				</div>
+			</li>
+			<li>
+				<div class="front">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork11.jpg" alt="">
+				</div>
+				<div class="back">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork12.jpg" alt="">
+				</div>
+			</li>
+			<li>
+				<div class="front">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork13.jpg" alt="">
+				</div>
+				<div class="back">
+					<img src="http://s.nx.com/s2/game/arpiel/obt/download/gallery/artwork/artwork14.jpg" alt="">
+				</div>
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>
